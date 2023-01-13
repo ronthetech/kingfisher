@@ -30,6 +30,17 @@ const RegisterScreen = ({ navigation }) => {
 		// }
 	}, [navigation])
 
+	useEffect(() => {
+		const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+			if (authUser) {
+				navigation.replace("Home")
+			}
+		})
+		return () => {
+			unsubscribe()
+		}
+	}, [])
+
 	const signUp = () => {
 		createUserWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
