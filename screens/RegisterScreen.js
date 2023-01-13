@@ -1,6 +1,6 @@
 import { Button, Input, Text } from "@rneui/themed"
 import { StatusBar } from "expo-status-bar"
-import React, { useLayoutEffect, useState } from "react"
+import React, { useLayoutEffect, useRef, useState } from "react"
 import { KeyboardAvoidingView, StyleSheet, View } from "react-native"
 import { auth, createUserWithEmailAndPassword } from "../firebase"
 
@@ -10,6 +10,11 @@ const RegisterScreen = ({ navigation }) => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
 	const [imageURL, setImageURL] = useState("")
+
+	const lastNameRef = useRef()
+	const emailRef = useRef()
+	const passwordRef = useRef()
+	const imageURLRef = useRef()
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
@@ -54,6 +59,10 @@ const RegisterScreen = ({ navigation }) => {
 					returnKeyType="next"
 					value={firstName}
 					onChangeText={(text) => setFirstName(text)}
+					onSubmitEditing={() => {
+						lastNameRef.current.focus()
+					}}
+					blurOnSubmit={false}
 					autoFocus
 				/>
 				<Input
@@ -63,6 +72,11 @@ const RegisterScreen = ({ navigation }) => {
 					returnKeyType="next"
 					value={lastName}
 					onChangeText={(text) => setLastName(text)}
+					ref={lastNameRef}
+					onSubmitEditing={() => {
+						emailRef.current.focus()
+					}}
+					blurOnSubmit={false}
 				/>
 				<Input
 					placeholder="Email"
@@ -72,6 +86,11 @@ const RegisterScreen = ({ navigation }) => {
 					returnKeyType="next"
 					value={email}
 					onChangeText={(text) => setEmail(text)}
+					ref={emailRef}
+					onSubmitEditing={() => {
+						passwordRef.current.focus()
+					}}
+					blurOnSubmit={false}
 				/>
 				<Input
 					placeholder="Password"
@@ -79,6 +98,11 @@ const RegisterScreen = ({ navigation }) => {
 					returnKeyType="next"
 					value={password}
 					onChangeText={(text) => setPassword(text)}
+					ref={passwordRef}
+					onSubmitEditing={() => {
+						imageURLRef.current.focus()
+					}}
+					blurOnSubmit={false}
 					secureTextEntry
 				/>
 				<Input
@@ -87,6 +111,7 @@ const RegisterScreen = ({ navigation }) => {
 					returnKeyType="done"
 					value={imageURL}
 					onChangeText={(text) => setImageURL(text)}
+					ref={imageURLRef}
 					onSubmitEditing={signUp}
 				/>
 			</View>
