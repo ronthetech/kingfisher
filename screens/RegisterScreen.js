@@ -24,10 +24,6 @@ const RegisterScreen = ({ navigation }) => {
 		navigation.setOptions({
 			headerBackTitle: "Login",
 		})
-
-		// return () => {
-		// 	second
-		// }
 	}, [navigation])
 
 	useEffect(() => {
