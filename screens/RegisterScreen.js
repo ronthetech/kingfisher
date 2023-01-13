@@ -2,7 +2,11 @@ import { Button, Input, Text } from "@rneui/themed"
 import { StatusBar } from "expo-status-bar"
 import React, { useLayoutEffect, useRef, useState } from "react"
 import { KeyboardAvoidingView, StyleSheet, View } from "react-native"
-import { auth, createUserWithEmailAndPassword } from "../firebase"
+import {
+	auth,
+	createUserWithEmailAndPassword,
+	updateProfile,
+} from "../firebase"
 
 const RegisterScreen = ({ navigation }) => {
 	const [firstName, setFirstName] = useState("")
@@ -30,8 +34,9 @@ const RegisterScreen = ({ navigation }) => {
 		createUserWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
 				const authUser = userCredential.user
-				authUser.update({
+				updateProfile(authUser, {
 					displayName: firstName,
+					email: email,
 					photoURL:
 						imageURL ||
 						"https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png",
@@ -42,6 +47,7 @@ const RegisterScreen = ({ navigation }) => {
 				const errorMessage = error.message
 				alert("ERROR|| Code: " + errorCode + " | " + "Message: " + errorMessage)
 			})
+		console.log(error)
 		// alert("Thanks for signing up " + firstName + "!")
 	}
 
