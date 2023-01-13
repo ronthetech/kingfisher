@@ -28,6 +28,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f84d4ecf-514a-4e58-bfa6-e72523598220"
+      }
+    },
+    "owner": "ronjtech"
   }
 }
